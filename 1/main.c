@@ -90,9 +90,52 @@ void zadacha5()
 	}
 }
 
+void zadacha6()
+{
+	printf("Введите число: ");
+	int i = (int)get_valid_double();
+	i%2? printf("%i - нечетное",i):printf("%i - четное",i);
+}
+
+void zadacha7()
+{
+	printf("Введите рост (в см): ");
+	int h = (int)get_valid_double();
+	printf("Введите массу тела: ");
+	int w = (int)get_valid_double();
+	if(w>h-100)
+	{
+		printf("Надо похудеть на %i kg",w-(h-100));
+	}
+	else
+	{
+		printf("Надо поправиться на %i kg",(h-100)-w);
+	}
+}
+
 
 
 int main()
 {
-zadacha5();
+int n = 999;
+while(n!=0)
+{
+	printf("*************************************\n");
+	printf("Введите номер задания (0 - выход, 1-7): ");
+	n = (int)get_valid_double();
+	switch(n)
+	{
+	case 1: zadacha1();break;
+	case 2: zadacha2();break;
+	case 3: zadacha3();break;
+	case 4: zadacha4();break;
+	case 5: zadacha5();break;
+	case 6: zadacha6();break;
+	case 7: zadacha7();break;
+	case 0: printf("Выхожу....\n");break;
+	default: printf("Неверный номер!\n");break;
+	}
+}
+
+
 }
