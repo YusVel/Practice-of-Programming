@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 
 int get_valid_int()
@@ -45,20 +46,54 @@ int NOD( int m, int n)
 	}
 }
 
+int is_square( double n)
+{
+	double temp = sqrt(n);
+	printf("Корень N = %5.5lf\n",temp);
+	int i = (int)temp;
+	if(i*10000==(int)(temp*10000)){return 1;}
+	else {return 0;}
+}
+
+
+int recsum(int i)
+{
+	if(i==0){return 0;}
+	else if(i<0){return -1;}
+	else
+	{
+		return i +recsum(i-1);
+	}
+}
+
+double sum(int i)
+{
+	return ((double)i/2)*((double)(i+1));
+}
 
 int main()
 {
 	/*
 	printf("Enter N (int): ");
 	int n = get_valid_int();
-	printf("%i",is_simple(n));
+	printf("Простое ли число N? Ответ: %i\n",is_simple(n));
 	*/
 	/*
 	printf("Enter N (int): ");
 	int n = get_valid_int();
 	printf("Enter M (int): ");
 	int m = get_valid_int();
-	printf("NOD(%i, %i) = %i",n,m,NOD(n,m));
+	printf("NOD(%i, %i) = %i\n",n,m,NOD(n,m));
 	*/
+	/*
+	printf("Enter N (int): ");
+	int n = get_valid_int();
+	printf("Является ди число квадратом другого целого числа ? Ответ: %i\n",is_square(n));
+	*/
+	
+	printf("Enter N (int): ");
+	int n = get_valid_int();
+	printf("Сумма натуральных чисел от 0 до %i: %16.0lf\n",n,sum(n));
+	printf("Сумма(рекурсивно) натуральных чисел от 0 до %i: %i\n",n,recsum(n));
 	return 0;
 }	
