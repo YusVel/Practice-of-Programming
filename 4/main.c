@@ -6,5 +6,8 @@
 
 int main()
 {
+zadacha1();
+zadacha2();
+zadacha3();
 zadacha4();	
 }
