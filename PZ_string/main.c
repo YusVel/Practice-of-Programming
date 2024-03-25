@@ -20,22 +20,17 @@ void memorymove()
 
 int main()
 { 
-	char *str1 = "Вышел ёжик их тумана!";
-	char *str2 = "уеыаоэяию\n";
+	char str1[] = "All that I have is all that you've given me Did you never worry that I'd come to depend on you...!";
+	char str2[] = "Aaeyuioj\n";
 	printf("%s\n",str1);
 	printf("Длина строки: %d\n",strlen(str1));
-	memmove(str1+3,str1+6,1);
-	printf("%s\n",str1);
 	
-	
-	/*
 	for(int i = 0;i<strlen(str1);i++)
 	{
-		memmove(str1+i,str1+i+1,(strlen(str1)-i-2));
-		printf("%s\n",str1);
+		memmove(str1+i,str1+(i++),(strlen(str1)-i));
 	}
 	printf("%s\n",str1);
-*/
+
 	//memorymove();
 	return 0;
 }
