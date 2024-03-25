@@ -4,7 +4,7 @@
 #include <math.h>
 #define SIZE 10
 #define OK 2 //Делитель
-#define RD_const 1000
+#define RD_const 500
 
 void show_2arr (int arr[SIZE][SIZE])
 {
@@ -56,7 +56,7 @@ int z2(int arr[SIZE][SIZE])
 		}
 	}
 	avarage /= (SIZE * SIZE);
-	printf("2) AVARAGE element = %d. ", avarage);
+	printf("2) AVARAGE element = %d.", avarage);
 
 	int result = 0;
 	int x = 0, y =0;
@@ -68,7 +68,7 @@ int z2(int arr[SIZE][SIZE])
 		{
 			if (arr[i][j] == avarage)
 			{
-				printf("%d(%d, %d)\n ", arr[i][j],i,j);
+				printf("%d(%d, %d)\n", arr[i][j],i,j);
 				return 0;
 			}
 			else
@@ -149,7 +149,7 @@ void z4(int arr[SIZE][SIZE])
 	{
 		printf("%d ", arr[row][i]);
 	}
-	printf("\n ");
+	printf("\n");
 }
 
 int z5(int arr[SIZE][SIZE])
@@ -279,6 +279,67 @@ void z10(int arr[SIZE][SIZE])
 	printf("10) Minimun sum of elements of the nearest two cols (%d and %d):\n",col-1,col);
 }
 
+int z11(int arr[SIZE][SIZE], int num)
+{
+	if(num>9||num<0)
+	{
+		printf("11) NUM have to randge from 0 to 9!!! Retern error(0).\n");
+		return 0;
+	}
+	for (int i = 0; i < SIZE; i++)
+	{
+		int count = 0;
+		for (int j = 0; j < SIZE; j++)
+		{
+			if((abs(arr[i][j])%10)==num)
+			{
+				count++;
+			}				
+		}
+		printf("11) Quantity of elements in the row(%d) with last figure(%d) = %d. \n",i,num,count);
+	}
+	return 1;
+}
+
+int z12(int arr[SIZE][SIZE])
+{
+	int d1 = 0;
+	int d2 = 0;
+	int sum_row = 0;
+	
+	for(int i = 0; i<SIZE;i++)
+	{
+		sum_row+=arr[0][i];
+		d1+=arr[i][i];
+		d2+=arr[SIZE-i-1][SIZE-i-1];
+	}
+
+	if(sum_row!=d1||sum_row!=d2)
+	{
+		printf("12) The matrix is NOT magic squer!\n");
+		return 0;
+	}
+	
+	for (int i = 0; i < SIZE; i++)
+	{
+		int sum_r = 0;
+		int sum_c = 0;
+		for (int j = 0; j < SIZE; j++)
+		{
+				sum_r +=arr[i][j];
+				sum_c+=arr[j][i];
+		}
+		if(sum_row!=sum_r||sum_row!=sum_c)
+		{
+			printf("12) The matrix is NOT magic squer!\n");
+			return 0;
+		}
+
+	}
+	printf("The matrix is magic squer!\n");
+	return 1;
+}
+
 int main()
 {
 	srand(time(NULL));
@@ -286,30 +347,31 @@ int main()
 
 	int arr[SIZE][SIZE] =
 	{
-		{0, 1, 1, 1, 1, 1, 1, 1, 1, 0},
-		{1,-99, 1,-1, 1, 1, 1, 1, 0,-1},
-		{1, 1, 0, 1, 1, 1, 1, 0, 1, 1},
-		{1,-1, 1,-1, 1, 1, 3, 1, 1, 1},
-		{1, 1, 1, 1, 0, 0, 1, 1, 1, 1},
-		{1, 1,-1, 1, 1, 0, 1, 1, 1, 1},
-		{1, 1, 1,-6, 1, 1, 0, 1, 1, 1},
-		{-1, 1, 1, 1, 1, 1, 1 ,0, 1,1},
-		{1, 0, 1, 1, 1, 1, 1, 1, 0, 1},
-		{0, 1, 1, 1,-1,-1,-1,-1,-1, 0}
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 	};
-	//random_arr(arr);
+	random_arr(arr);
 	printf("Your source array:\n");
 	show_2arr(arr);
-	//z1(arr);
-	//z2(arr);
-	//z3(arr);
-	//z4(arr);
-	//z5(arr);
-	//z6(arr);
-	//z7(arr);
-	//z8(arr);
-	//z9(arr,n_arr);
-	//z10(arr);
-
+	z1(arr);
+	z2(arr);
+	z3(arr);
+	z4(arr);
+	z5(arr);
+	z6(arr);
+	z7(arr);
+	z8(arr);
+	z9(arr,n_arr);
+	z10(arr);
+	z11(arr,9);
+	z12(arr);
 	return 0;
 }
