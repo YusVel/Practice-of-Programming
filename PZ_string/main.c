@@ -17,48 +17,47 @@ void memorymove()
 }
 
 
-
+//Поиск и удаление символов в строке 
 int main()
 { 
-	FILE *file = NULL;
+	FILE *file;
 	
-	if (fopen_s(&file, "Data.txt", "r")!=0)
+	if ((file=fopen( "Data.txt", "r"))==NULL)
 	{
 		printf("The openning is failed");
+		return 0;
 	}
 	
 	double size = 0;
 	char t = 'r';
-	while (fscanf_s(file, "%c", &t)!=EOF)
+	while (fscanf(file, "%c", &t)!=EOF)
 	{
 		size++;
 	}
 	printf("VOLUM = %5.0lf baits\n", size);
-	fseek(file, NULL, SEEK_SET);
+	fseek(file, 0, SEEK_SET);
 
 	char* str1 =(char*)malloc(size);
 
 	int i = 0;
-	while (fscanf_s(file, "%c", &t) != EOF)
+	while (fscanf(file, "%c", &t) != EOF)
 	{
 		str1[i++] = t;
 	}
 
 	printf("%s\n\n", str1);
-	printf("%d", strlen(str1));
-	
-	char str2[] = " ";
-	printf("%s\n",str1);
+		
+	char str2[] = "qwerty";
+	printf("%s\n",str2);
 	printf("Length str: %d\n",strlen(str1));
 	
 	for(int i = strcspn(str1, str2);i<strlen(str1)-1;)
 	{
 		memmove(str1+i,str1+i+1,(strlen(str1)-i));
 		i = strcspn(str1, str2); 
-
 	}
 	printf("%s\n", str1);
-	printf("%d", strlen(str1));
+	printf("VOLUM = %5.0d baits\n", strlen(str1));
 
 	//free(str1);
 	fclose(file);
