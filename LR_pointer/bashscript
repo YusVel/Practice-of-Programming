@@ -1,0 +1,10 @@
+#!/bin/bash
+# This is a comment
+echo -n "Вы запустили Bash-скрипт! Какую программу использовать(Классику - 0/Указатели - другое число)? "
+read foo
+if [$(foo) -eq 0]
+then 
+$(./main.e)
+else
+$(./main2.e)
+fi
