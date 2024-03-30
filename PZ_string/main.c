@@ -1,66 +1,76 @@
 #include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#define SIZE 10
 
-void memorymove()
+
+int get_valid_int()
 {
-	char arr[] ="Hello!";
-	printf("Длина строки: %d\n",strlen(arr));
-	
-	memmove(arr,arr+1,strlen(arr)-1);
-
-	for(int i = 0;i<SIZE;i++)
+	int result = 0;
+	int err = scanf("%d", &result);
+	while (err != 1 || getchar() != 10)
 	{
-		printf("%c",arr[i]);
+		printf("INPUT ERROR! REPEAT! ");
+		while (getchar() != 10) {}
+		err = scanf("%d", &result);
+	}
+	return result;
+}
+
+int sum_num(int num)
+{
+	if (num == 0)
+	{
+		return 0;
+	}
+	else
+	{
+		return num % 10 + sum_num((num - (num % 10)) / 10);
+	}
+}
+
+
+int from_write_to_left(int num)
+{
+	if (num == 0)
+	{
+		return 0;
+	}
+	else
+	{
+		printf("%d ", num % 10);
+		return from_write_to_left((num - (num % 10)) / 10);
 	}
 }
 
 
 
+int from_left_to_write(int num)
+{
+	int temp = 1;
+	while (num / temp > 9)
+	{
+		temp *= 10;
+	}
+	printf("**TEMP = %d**\n", temp);
+	if (num < 10)
+	{
+		printf("%d", num);
+	}
+	else
+	{
+		printf("%d ", num / temp);
+		return from_write_to_left(num - ((int)(num / temp) * temp));
+	}
+}
+
 int main()
-{ 
-	FILE *file = NULL;
-	
-	if (fopen_s(&file, "Data.txt", "r")!=0)
-	{
-		printf("The openning is failed");
-	}
-	
-	double size = 0;
-	char t = 'r';
-	while (fscanf_s(file, "%c", &t)!=EOF)
-	{
-		size++;
-	}
-	printf("VOLUM = %5.0lf baits\n", size);
-	fseek(file, NULL, SEEK_SET);
+{
+	printf("Введите целочисленное значение: ");
+	int  num = get_valid_int();
+	printf("СУММА ЦИФР = %d\n", sum_num(num));
+	printf("Последовательность цифр справа налево: ");
+	from_write_to_left(num);
 
-	char* str1 =(char*)malloc(size);
 
-	int i = 0;
-	while (fscanf_s(file, "%c", &t) != EOF)
-	{
-		str1[i++] = t;
-	}
-
-	printf("%s\n\n", str1);
-	printf("%d", strlen(str1));
-	
-	char str2[] = " ";
-	printf("%s\n",str1);
-	printf("Length str: %d\n",strlen(str1));
-	
-	for(int i = strcspn(str1, str2);i<strlen(str1)-1;)
-	{
-		memmove(str1+i,str1+i+1,(strlen(str1)-i));
-		i = strcspn(str1, str2); 
-
-	}
-	printf("%s\n", str1);
-	printf("%d", strlen(str1));
-
-	//free(str1);
-	fclose(file);
+	printf("\nПоследовательность цифр слева направо: ");
+	from_left_to_write(num);
 	return 0;
 }
